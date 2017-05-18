@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
+import { Data } from "../../services/Data";
 
 @Component({
   selector: 'page-list',
@@ -10,7 +11,7 @@ export class ListPage {
   icons: string[];
   items: Array<{title: string, note: string, icon: string}>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public _data: Data) {
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedItem = navParams.get('item');
 
@@ -27,7 +28,12 @@ export class ListPage {
       });
     }
   }
-
+    ionViewDidLoad(){
+      console.log("Here");
+     this._data.db.child('/').on('value', data => {
+            console.log("Data: ",data.val());
+        });
+    }
   itemTapped(event, item) {
     // That's right, we're pushing to ourselves!
     this.navCtrl.push(ListPage, {

@@ -1,20 +1,18 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import {DataService} from '../../services/dataservice';
+import {Data} from '../../services/Data';
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html',
-  providers: [DataService]
+  providers: [Data]
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, private _data: DataService) {
+  constructor(public navCtrl: NavController, private _data: Data) {
 
   }
-  IonViewWillEnter(){
-     this._data.db.child('staticData').on('value', data => {
-            console.log(data.val());
-        });
+  IonViewDidLoad(){
+     
   }
 }
